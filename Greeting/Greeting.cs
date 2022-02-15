@@ -9,19 +9,19 @@ namespace Greeting
 {
     public class Greeting : IGreeting
     {
-        protected IGreetingHandler h1, h2, h3, h4, h5;
+        protected IGreetingHandler nullHandler, manyNamesWithSomeUpperHandler, manyNamesHandler, twoNamesHandler, oneNameHandler;
         public Greeting()
         {
-            h1 = new NullHandler();
-            h2 = new ManyNamesWithSomeUpperHandler();
-            h3 = new ManyNamesHandler();
-            h4 = new TwoNamesHandler();
-            h5 = new OneNameHandler();
+            nullHandler = new NullHandler();
+            manyNamesWithSomeUpperHandler = new ManyNamesWithSomeUpperHandler();
+            manyNamesHandler = new ManyNamesHandler();
+            twoNamesHandler = new TwoNamesHandler();
+            oneNameHandler = new OneNameHandler();
 
-            h1.SetNext(h2);
-            h2.SetNext(h3);
-            h3.SetNext(h4);
-            h4.SetNext(h5);
+            nullHandler.SetNext(manyNamesWithSomeUpperHandler);
+            manyNamesWithSomeUpperHandler.SetNext(manyNamesHandler);
+            manyNamesHandler.SetNext(twoNamesHandler);
+            twoNamesHandler.SetNext(oneNameHandler);
         }
 
         public string Greet(params string[] name)
@@ -32,7 +32,7 @@ namespace Greeting
 
         private string Handle(params string[] names)
         {
-            return h1.Handle(names);
+            return nullHandler.Handle(names);
         }
 
 

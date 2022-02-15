@@ -12,7 +12,7 @@ namespace Greeting.Test
 
             _sut = new Greeting();
         }
-        /*
+        
         [Test]
         //[Ignore("Temp")]
         public void Should_Add_Greeting_To_Name()
@@ -82,7 +82,7 @@ namespace Greeting.Test
 
             Assert.AreEqual(expected, actual);
         }
-        */
+        
         [Test]
         //[Ignore("Temp")]
         public void Should_Handle_Backspaces()
