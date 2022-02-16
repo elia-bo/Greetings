@@ -33,7 +33,7 @@ namespace Greeting.Chain
                     else result.Add(item);
                 }
             }
-            return result.ToArray();
+            return RemoveEmptyNames(result).ToArray();
         }
 
         private static string MakeSingleItem(string input)
@@ -41,5 +41,7 @@ namespace Greeting.Chain
             var temp = input.Remove(0, 1).Remove(input.Length - 2);
             return temp;
         }
+
+        private static List<string> RemoveEmptyNames(List<string> input) => input.Where(x => x != "").ToList();
     }
 }

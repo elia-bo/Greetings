@@ -92,5 +92,15 @@ namespace Greeting.Test
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        //[Ignore("Temp")]
+        public void Should_Handle_Empty_Names()
+        {
+            var expected = "Hello, Bob, Dianne and Charlie.";
+            var actual = _sut.Greet("Bob", "", "Dianne", "Charlie");
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
