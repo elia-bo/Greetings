@@ -11,36 +11,42 @@ namespace Greeting.Chain
         public static string[] Validate(params string[] input)
         {
             if (input == null) return null;
-            List<string> result = new List<string>();
+            var result = new List<string>();
             if (input.Any(x => x.Contains(@"""")))
-            {
-                foreach (var item in input)
-                {
-                    if (item.Contains(@""""))
-                        result.Add(MakeSingleItem(item));
-                    else result.Add(item);
-                }
-            }
+                result = AddNamesWithoutQuotesToList(input);
             else
-            {
-                foreach (var item in input)
-                {
-                    if (item.Contains(','))
-                    {
-                        result.Add(item.Split(',')[0].Trim());
-                        result.Add(item.Split(',')[1].Trim());
-                    }
-                    else result.Add(item);
-                }
-            }
+                result = AddPairedNamesToList(input);
             return RemoveEmptyNames(result).ToArray();
         }
 
-        private static string MakeSingleItem(string input)
+        private static List<string> AddPairedNamesToList(string[] input)
         {
-            var temp = input.Remove(0, 1).Remove(input.Length - 2);
-            return temp;
+            var result = new List<string>();
+            foreach (var item in input)
+            {
+                if (item.Contains(','))
+                {
+                    var temp = item.Split(',').Select(x => x.Trim());
+                    result.AddRange(temp);
+                }
+                else result.Add(item);
+            }
+            return result;
         }
+
+        private static List<string> AddNamesWithoutQuotesToList(string[] input)
+        {
+            var result = new List<string>();
+            foreach (var item in input)
+            {
+                if (item.Contains(@""""))
+                    result.Add(MakeSingleItem(item));
+                else result.Add(item);
+            }
+            return result;
+        }
+
+        private static string MakeSingleItem(string input) => input.Replace("\"", string.Empty);
 
         private static List<string> RemoveEmptyNames(List<string> input) => input.Where(x => x != "").ToList();
     }

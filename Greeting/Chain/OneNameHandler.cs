@@ -21,9 +21,7 @@ namespace Greeting
         public override string Handle(params string[] names)
         {
             if (names.Length == 1)
-            {
                 return Greet(names[0]);
-            }
             throw new Exception("Something wrong in the chain");
         }
 

@@ -11,8 +11,8 @@ namespace Greeting.Chain
         protected override string Greet(params string[] names)
         {
             string result = "Hello, ";
-            List<string> upper = GetUppercase(names);
-            List<string> lower= GetLowercase(names);
+            var upper = GetUppercase(names);
+            var lower = GetLowercase(names);
             while (lower.Count > 2)
             {
                 result += $"{lower.First()}, ";

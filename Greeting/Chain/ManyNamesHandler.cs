@@ -11,7 +11,7 @@ namespace Greeting.Chain
         protected override string Greet(params string[] names)
         {
             string result = "Hello, ";
-            for (int i = 0; i <= names.Length -3; i++)
+            for (int i = 0; i < names.Length -2; i++)
             {
                 result += $"{names[i]}, ";
             }

@@ -9,7 +9,7 @@ namespace Greeting
 {
     public class Greeting : IGreeting
     {
-        protected IGreetingHandler nullHandler, manyNamesWithSomeUpperHandler, manyNamesHandler, twoNamesHandler, oneNameHandler;
+        private readonly IGreetingHandler nullHandler, manyNamesWithSomeUpperHandler, manyNamesHandler, twoNamesHandler, oneNameHandler;
         public Greeting()
         {
             nullHandler = new NullHandler();
@@ -24,17 +24,8 @@ namespace Greeting
             twoNamesHandler.SetNext(oneNameHandler);
         }
 
-        public string Greet(params string[] name)
-        {
-            string[] names = Validator.Validate(name);
-            return Handle(names);
-        }
+        public string Greet(params string[] name) => Handle(Validator.Validate(name));
 
-        private string Handle(params string[] names)
-        {
-            return nullHandler.Handle(names);
-        }
-
-
+        private string Handle(params string[] names) => nullHandler.Handle(names);
     }
 }
